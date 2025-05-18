@@ -9,7 +9,7 @@ namespace Wix6_Sample
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string messageBoxText = "Thou didst click, and I appeared!";
+            string messageBoxText = "Lo, thou didst click and I appeared!";
             string caption = "Wix6-Sample Click Alert!";
 
             // Use System.Windows.Forms.MessageBox, which only supports buttons and icons as parameters
