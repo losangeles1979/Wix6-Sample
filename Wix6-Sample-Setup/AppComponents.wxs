@@ -1,0 +1,18 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="AppComponents" Directory="INSTALLFOLDER">
+      <Component>
+          <File Source="Wix6-Sample.exe" />
+      </Component>
+      <Component>
+          <File Source="Wix6-Sample.dll" />
+      </Component>
+      <Component>
+          <File Source="Wix6-Sample.deps.json" />
+      </Component>
+      <Component>
+        <File Source="Wix6-Sample.runtimeconfig.json" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

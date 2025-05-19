@@ -1,0 +1,41 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+  <Bundle Id="TODO_Manufacturer.Wix6_Sample_Bootstrapper" 
+          Name="Wix6-Sample-Bootstrapper" 
+          Manufacturer="FreeAndEasy Tech" 
+          Version="6.0.0.0"
+          UpgradeCode="{0D8823F1-30AD-4263-A0D6-3455A0D1CAC1}">
+    <!--  NOTE: to create a fresh UpgradeCode from within Visual Studio 2022
+          use the Menu options:  Tools / Create GUID / Registry Format / New GUID / Copy / Exit -->
+
+    <!--  If you want to place a hyperlink on the bootstrapper startup dialog
+          for a customized corporate license file, use the following code:
+              <BootstrapperApplication>
+                  <bal:WixStandardBootstrapperApplication LicenseUrl="https://www.example.com/license" Theme="hyperlinkLicense" />
+              </BootstrapperApplication>
+    -->
+
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication LicenseUrl="https://www.example.com/license" Theme="hyperlinkLicense" />
+    </BootstrapperApplication>
+    
+    <Chain>
+      <!--Put all the *.msi, *.exe, etc. packages here!
+      They are order-dependent, top-to-bottom
+      unless you use the After="" attribute.
+      Therefore, list the prerequisites (if any) first. -->
+
+      <!-- For example, here's the Microsoft Win64 .Net Core 8 redistributable -->
+      <ExePackage Id="DotNetCore8" 
+                  SourceFile=".\Resources\windowsdesktop-runtime-8.0.16-win-x64.exe"
+                  InstallArguments="/quiet /norestart"
+                  Permanent="yes"
+                  DetectCondition="NETCORE8DESKTOP"/>
+      
+      <!-- It's good proactice to set a rollback boundary after prerequisites -->
+      <RollbackBoundary />
+      
+      <MsiPackage Id="SetupMsiPackage" SourceFile="Wix6-Sample-Setup.msi" />
+    </Chain>
+
+  </Bundle>
+</Wix>
