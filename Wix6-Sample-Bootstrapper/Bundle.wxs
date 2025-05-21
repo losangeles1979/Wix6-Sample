@@ -7,6 +7,9 @@
     <!--  NOTE: to create a fresh UpgradeCode from within Visual Studio 2022
           use the Menu options:  Tools / Create GUID / Registry Format / New GUID / Copy / Exit -->
 
+	  <WixVariable Id="WixUILicenseRtf"
+                   Value="Resources\My License Agreement.rtf" />
+	  
     <!--  If you want to place a hyperlink on the bootstrapper startup dialog
           for a customized corporate license file, use the following code:
               <BootstrapperApplication>

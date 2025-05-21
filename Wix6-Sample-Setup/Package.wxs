@@ -1,15 +1,51 @@
-﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Id="TODO_Manufacturer.Wix6_Sample_Setup" 
-           Name="Wix6-Sample App" 
-           Manufacturer="FreeAndEasy Tech" 
-           Version="6.0.0.0">
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:util="http://wixtoolset.org/schemas/v4/wixutil"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wixbal"
+	 xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
+	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wixnetfx">
+	
+	<!-- Note: I had big problems getting this Wix6-Sample-Setup project 
+	           to build when I changed the boilerplate code to use the
+			   WixUI_Mondo dialog set.  After a great deal of research
+			   and many false leads here is how I fixed it:
 
-    <!-- Embed the cab file into the msi file-->
-    <MediaTemplate EmbedCab="yes" />
-    
-    <Feature Id="Main">
-      <ComponentGroupRef Id="AppComponents" />
-    </Feature>
-  </Package>
+				1. From the menu select Tools / NuGet Package Manager
+
+				2. Click on the Browse tab, enter "WixToolset.UI" (without double quotes) 
+				   in the search edit box.
+
+				3. You will see WixToolset.UI.wixext.  Download that.
+
+				4. After reading the license, agree to it and click Install.
+				   You will be warned that changes are about to be made, accept them
+
+				5. Expand the Wix6-Sample-Setup project in Solution Explorer.
+				   Under Dependencies you will see WiX Extensions / WixToolset.UI
+
+				6. In the Output window select "Show output from Package Manager".
+				   You will see the following entry:
+				   Installing NuGet package WixToolset.UI.wixext 6.0.0.
+				   That's how you know you have the right version of the package.
+
+                *** THE PROJECT FINALLY BUILDS SUCCESSFULLY! ***
+			   -->
+	
+	<Package Id="TODO_Manufacturer.Wix6_Sample_Setup"
+		  Name="Wix6-Sample App"
+		  Manufacturer="FreeAndEasy Tech"
+		  Version="6.0.0.0">
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<!-- Embed the cab file into the msi file-->
+		<MediaTemplate EmbedCab="yes" />
+
+		<!-- To make the license file part of the WiX project, declare it as a Binary element -->
+		<Binary Id="LicenseFile" SourceFile="..\Wix6-Sample-Bootstrapper\Resources\My License Agreement.rtf" />
+
+		<ui:WixUI Id="WixUI_Mondo"   />
+
+		<Feature Id="Main">
+			<ComponentGroupRef Id="AppComponents" />
+		</Feature>
+	</Package>
 </Wix>
