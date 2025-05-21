@@ -1,6 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
   <Bundle Id="TODO_Manufacturer.Wix6_Sample_Bootstrapper" 
-          Name="Wix6-Sample-Bootstrapper" 
+          Name="Wix6 Sample Installer" 
           Manufacturer="FreeAndEasy Tech" 
           Version="6.0.0.0"
           UpgradeCode="{0D8823F1-30AD-4263-A0D6-3455A0D1CAC1}">
@@ -37,6 +37,13 @@
       <!-- It's good proactice to set a rollback boundary after prerequisites -->
       <RollbackBoundary />
       
+		<!-- Special note: as of version 6 WiX no longer allows the DisplayInternalUI="yes" attribute 
+		                   for an MsiPackage element in the Chain.
+		                   In earlier versions it could be used to display the msi setup's dialogs
+						   in case you used a dialog set like WixUI_Mondo.
+						   But if the user chooses to directly install the msi package
+						   outside of the bootstrapper, the UI will be visible. -->
+		
       <MsiPackage Id="SetupMsiPackage" SourceFile="Wix6-Sample-Setup.msi" />
     </Chain>
 
