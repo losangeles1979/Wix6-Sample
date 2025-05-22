@@ -40,9 +40,14 @@
 		<MediaTemplate EmbedCab="yes" />
 
 		<!-- To make the license file part of the WiX project, declare it as a Binary element -->
-		<Binary Id="LicenseFile" SourceFile="..\Wix6-Sample-Bootstrapper\Resources\My License Agreement.rtf" />
+		<Binary Id="LicenseFile" SourceFile="..\Wix6-Sample-Bootstrapper\Resources\MyLicenseAgreement.rtf" />
 
 		<ui:WixUI Id="WixUI_Mondo"   />
+
+	<!-- LESSON LEARNED:  In order to customize the text of the standard "lorem ipsum" license,
+         add the WixVariable below.
+         Gary Ledbetter   6/25/2020 -->
+		 <WixVariable Id="WixUILicenseRtf" Value="..\Wix6-Sample-Bootstrapper\Resources\MyLicenseAgreement.rtf" />
 
 		<Feature Id="Main">
 			<ComponentGroupRef Id="AppComponents" />

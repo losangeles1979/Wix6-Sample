@@ -1,4 +1,8 @@
-﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+            xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util"
+            xmlns:msi="http://wixtoolset.org/schemas/v4/wxs/msi"
+            xmlns:ex="http://wixtoolset.org/schemas/v4/wxs/ex"
+            xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx">
   <Bundle Id="TODO_Manufacturer.Wix6_Sample_Bootstrapper" 
           Name="Wix6 Sample Installer" 
           Manufacturer="FreeAndEasy Tech" 
@@ -17,10 +21,20 @@
               </BootstrapperApplication>
     -->
 
-    <BootstrapperApplication>
-      <bal:WixStandardBootstrapperApplication LicenseUrl="https://www.example.com/license" Theme="hyperlinkLicense" />
+    <!--  If you want to directly display a customized corporate license file 
+	      (i.e., not a hyperlink to the file) on the bootstrapper startup dialog
+		  use the code below: -->	  
+      <BootstrapperApplication>
+      <Payload SourceFile=".\Resources\MyLicenseAgreement.rtf"/>
+      <bal:WixStandardBootstrapperApplication
+        ShowVersion="yes"
+        LicenseFile=".\Resources\MyLicenseAgreement.rtf"
+        SuppressOptionsUI="yes"
+        LogoFile=".\Resources\LogoFileGENERIC.bmp"
+        LogoSideFile=".\Resources\LogoSideFileGENERIC.bmp"
+        Theme="rtfLicense" />
     </BootstrapperApplication>
-    
+
     <Chain>
       <!--Put all the *.msi, *.exe, etc. packages here!
       They are order-dependent, top-to-bottom

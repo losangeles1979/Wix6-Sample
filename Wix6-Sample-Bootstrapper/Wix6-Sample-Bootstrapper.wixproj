@@ -13,6 +13,6 @@
     <ProjectReference Include="..\Wix6-Sample-Setup\Wix6-Sample-Setup.wixproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\My License Agreement.rtf" />
+    <None Include="Resources\MyLicenseAgreement.rtf" />
   </ItemGroup>
 </Project>
