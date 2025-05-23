@@ -5,9 +5,9 @@
 	 xmlns:netfx="http://wixtoolset.org/schemas/v4/wixnetfx">
 	
 	<!-- Note: I had big problems getting this Wix6-Sample-Setup project 
-	           to build when I changed the boilerplate code to use the
-			   WixUI_Mondo dialog set.  After a great deal of research
-			   and many false leads here is how I fixed it:
+	           to build when I changed the boilerplate code to use any
+			   special dialog set, e.g. WixUI_Mondo.  After a great deal
+			   of research and many false leads here is how I fixed it:
 
 				1. From the menu select Tools / NuGet Package Manager
 
@@ -39,17 +39,39 @@
 		<!-- Embed the cab file into the msi file-->
 		<MediaTemplate EmbedCab="yes" />
 
-		<!-- To make the license file part of the WiX project, declare it as a Binary element -->
-		<Binary Id="LicenseFile" SourceFile="..\Wix6-Sample-Bootstrapper\Resources\MyLicenseAgreement.rtf" />
+		<!-- Just as a default we'll go with the WixUI_Minimal dialog set -->
+		<!-- but you can see other values below, with sample code. -->
+		<ui:WixUI Id="WixUI_Minimal" />
+		
+		<!-- LESSON LEARNED:  In order to customize the text of the standard "lorem ipsum" license,
+        add the WixVariable below. -->
+		<WixVariable Id="WixUILicenseRtf" Value="..\Wix6-Sample-Bootstrapper\Resources\MyLicenseAgreement.rtf" />
 
-		<ui:WixUI Id="WixUI_Mondo"   />
+		<!-- Let's customize the appearance of the dialogs with some bitmaps.-->
+		<Property Id="WixUIBannerBmp" Value="..\Wix6-Sample-Bootstrapper\Resources\LogoFileGENERIC.bmp" />
+		<Property Id="WixUIBannerSideBmp" Value="..\Wix6-Sample-Bootstrapper\Resources\LogoSideFileGENERIC.bmp" />		
 
-	<!-- LESSON LEARNED:  In order to customize the text of the standard "lorem ipsum" license,
-         add the WixVariable below.
-         Gary Ledbetter   6/25/2020 -->
-		 <WixVariable Id="WixUILicenseRtf" Value="..\Wix6-Sample-Bootstrapper\Resources\MyLicenseAgreement.rtf" />
+<!--		<ui:WixUI Id="WixUI_Mondo"   /> -->
+<!--		<ui:WixUI Id="WixUI_Minimal" /> -->
+<!--		<ui:WixUI Id="WixUI_FeatureTree" /> -->
 
-		<Feature Id="Main">
+		<!-- *** Note that if you use <ui:WixUI Id="WixUI_InstallDir"/>
+		         you must define the WIXUI_INSTALLDIR property to avoid a run-time error:
+		         <ui:WixUI Id="WixUI_InstallDir" />
+		         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />  -->
+
+		<!-- *** Note that if you use <ui:WixUI Id="WixUI_Advanced"/> 
+		         you must also define the following properties or it will not compile:
+                 <Property Id="ApplicationFolderName" Value="MyApplicationFolder" />
+                 <Property Id="WixAppFolder" Value="WixPerUserFolder" />  -->
+		         <!-- You could also set the Value of WixAppFolder to "WixPerMachineFolder" 
+				 but don't forget to creat a Directory in a Fragment -->
+<!--
+		<ui:WixUI Id="WixUI_Advanced" />
+		<Property Id="ApplicationFolderName" Value="My Application Folder" />
+		<Property Id="WixAppFolder" Value="WixPerUserFolder"/>		
+-->		
+		<Feature Id="Main" Title="Sample C# App" Description="Doesn't do anything special" >
 			<ComponentGroupRef Id="AppComponents" />
 		</Feature>
 	</Package>
